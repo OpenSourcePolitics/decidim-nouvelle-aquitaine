@@ -1,4 +1,5 @@
 ---
 # tasks file for app_deployment
 - import_tasks: decidim.yml
+- import_tasks: nginx.yml
 

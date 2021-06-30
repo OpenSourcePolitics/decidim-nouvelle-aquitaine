@@ -1,0 +1,11 @@
+server {
+
+    server_name DECIDIM_URL;
+
+    client_max_body_size 32M;
+
+    passenger_enabled on;
+
+    rails_env    production;
+    root         {{ osp_app_directory }}/public;
+}

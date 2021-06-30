@@ -1,0 +1,22 @@
+- name: Set nginx config
+  template:
+    src: templates/nginx.j2
+    dest: "/etc/nginx/sites-available/decidim"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+  become: true
+
+- name: Add symbolic link to sites-enabled
+  ansible.builtin.file:
+    src: "/etc/nginx/sites-available/decidim"
+    dest: "/etc/nginx/sites-enabled/decidim"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: link
+  become: true
+
+- name: Restart nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+  become: true
