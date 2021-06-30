@@ -1,0 +1,46 @@
+- name: Clone osp-app
+  git:
+    repo: "{{ osp_app_repository }}"
+    dest: "{{ osp_app_directory }}"
+    version: master
+  ignore_errors: yes
+
+- name: Run bundle install
+  shell:
+    cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle install"
+    chdir: "{{ osp_app_directory }}"
+
+- name: Create database
+  shell:
+    cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle exec rails db:create"
+    chdir: "{{ osp_app_directory }}"
+
+- name: Run migrations
+  shell:
+    cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle exec rake db:migrate"
+    chdir: "{{ osp_app_directory }}"
+
+- name: Generate secret
+  command:
+    cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle exec rake secret"
+    chdir: "{{ osp_app_directory }}"
+  register: secret_key_base
+
+- name: Create .env file
+  shell:
+    cmd: touch .env
+    chdir: "{{ osp_app_directory }}"
+  ignore_errors: yes
+
+- name: Store secret in .env file
+  template:
+    src: templates/env.j2
+    dest: "{{ osp_app_directory }}/.env"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+
+- name: Precompile assets
+  shell:
+    cmd: RAILS_ENV=production /home/{{ ansible_user }}/.rbenv/shims/bundle exec rails tmp:cache:clear assets:clobber assets:precompile
+    chdir: "{{ osp_app_directory }}"
+  ignore_errors: yes
