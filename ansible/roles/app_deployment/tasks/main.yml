@@ -3,4 +3,4 @@
 - import_tasks: decidim.yml
 - import_tasks: nginx.yml
 - import_tasks: sidekiq.yml
-
+- import_tasks: logrotate.yml
