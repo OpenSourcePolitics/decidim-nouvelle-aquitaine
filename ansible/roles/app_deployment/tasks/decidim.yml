@@ -1,10 +1,3 @@
-- name: Clone osp-app
-  git:
-    repo: "{{ osp_app_repository }}"
-    dest: "{{ osp_app_directory }}"
-    version: master
-  ignore_errors: yes
-
 - name: Install bundler gem
   shell:
     cmd: "/home/{{ ansible_user }}/.rbenv/shims/gem install bundler:2.2.11"
