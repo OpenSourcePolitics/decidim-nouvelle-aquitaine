@@ -5,6 +5,11 @@
     version: master
   ignore_errors: yes
 
+- name: Install bundler gem
+  shell:
+    cmd: "/home/{{ ansible_user }}/.rbenv/shims/gem install bundler:2.2.11"
+    chdir: "{{ osp_app_directory }}"
+
 - name: Run bundle install
   shell:
     cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle install"
