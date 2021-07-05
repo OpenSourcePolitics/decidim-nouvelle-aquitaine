@@ -1,0 +1,38 @@
+- name: Install dependencies
+  apt:
+    pkg:
+    - dirmngr
+    - gnupg
+    - apt-transport-https 
+    - ca-certificates
+  become: true
+
+- name: Add Passenger PGP key
+  ansible.builtin.apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 561F9B9CAC40B2F7
+  become: true
+
+- name: Add Passenger APT repository
+  ansible.builtin.apt_repository:
+    repo: deb https://oss-binaries.phusionpassenger.com/apt/passenger focal main
+    state: present
+  become: true
+
+- name: Update apt packages
+  apt:
+    name: "*"
+    state: latest
+  become: true
+
+- name: Install Passenger
+  apt:
+    name: passenger
+    state: present
+  become: true
+
+- name: Set Passenger config
+  template:
+    src: templates/passenger.j2
+    dest: "/etc/nginx/conf.d/mod-http-passenger"
+  become: true
