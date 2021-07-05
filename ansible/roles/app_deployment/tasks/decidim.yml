@@ -4,7 +4,8 @@
     - zlib1g-dev 
     - libicu-dev
     - nodejs 
-    - imagemagick 
+    - imagemagick
+    - libpq-dev
   become: true
 
 - name: Decidim | Install bundler gem
