@@ -1,4 +1,4 @@
-- name: Install dependencies
+- name: Rbenv | Install dependencies
   apt:
     pkg:
     - git 
@@ -17,15 +17,15 @@
     - libdb-dev
   become: true
 
-- name: Clone rbenv repo
+- name: Rbenv | Clone rbenv repo
   ansible.builtin.git:
     repo: "https://github.com/rbenv/rbenv.git"
-    dest: "{{ ansible_user }}/.rbenv"
+    dest: "/home/{{ ansible_user }}/.rbenv"
 
-- name: Set rbenv config
+- name: Rbenv | Set rbenv config
   shell:
-    cmd: echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> {{ ansible_user }}/.bashrc | echo 'eval "$(rbenv init -)"' >> {{ ansible_user }}/.bashrc
+    cmd: echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/{{ ansible_user }}/.bashrc | echo 'eval "$(rbenv init -)"' >> /home/{{ ansible_user }}/.bashrc
 
-- name: Source .bashrc
+- name: Rbenv | Source .bashrc
   shell:
-    cmd: "source {{ ansible_user }}/.bashrc"
+    cmd: "source /home/{{ ansible_user }}/.bashrc"
