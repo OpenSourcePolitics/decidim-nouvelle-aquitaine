@@ -1,0 +1,20 @@
+- name: Clone ruby-build repo
+  ansible.builtin.git:
+    repo: "https://github.com/rbenv/ruby-build.git"
+    dest: "{{ ansible_user }}/.rbenv/plugins/ruby-build"
+
+- name: Install Ruby
+  shell:
+    cmd: "rbenv install 2.6.6"
+
+- name: Set Ruby version
+  shell:
+    cmd: "rbenv shell 2.6.6 | rbenv global 2.6.6"
+
+- name: Set gem config
+  shell:
+    cmd: "echo 'gem: --no-document' > {{ ansible_user }}/.gemrc"
+
+- name: Install bundler
+  shell:
+    cmd: "gem install bundler:2.2.11"
