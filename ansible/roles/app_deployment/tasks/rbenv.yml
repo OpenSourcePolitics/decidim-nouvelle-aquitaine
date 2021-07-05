@@ -8,6 +8,7 @@
     - build-essential
     - libssl-dev 
     - libyaml-dev 
+    - libreadline-dev 
     - libreadline6-dev 
     - zlib1g-dev
     - libncurses5-dev 
@@ -27,5 +28,5 @@
     cmd: echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/{{ ansible_user }}/.bashrc | echo 'eval "$(rbenv init -)"' >> /home/{{ ansible_user }}/.bashrc
 
 - name: Rbenv | Source .bashrc
-  shell:
-    cmd: "source /home/{{ ansible_user }}/.bashrc"
+  shell: 
+    cmd: . /home/mako/.bashrc

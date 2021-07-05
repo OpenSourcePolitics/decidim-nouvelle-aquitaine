@@ -1,43 +1,56 @@
-- name: Install bundler gem
+- name: Decidim | Install dependencies
+  apt:
+    pkg: 
+    - zlib1g-dev 
+    - libicu-dev
+    - nodejs 
+    - imagemagick 
+  become: true
+
+- name: Decidim | Install bundler gem
   shell:
     cmd: "/home/{{ ansible_user }}/.rbenv/shims/gem install bundler:2.2.11"
     chdir: "{{ osp_app_directory }}"
 
-- name: Run bundle install
+- name: Decidim | Run bundle install
   shell:
     cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle install"
     chdir: "{{ osp_app_directory }}"
 
-- name: Create database
+- name: Decidim | Create PSQL user
+  shell:
+    cmd: sudo -u postgres psql -c "CREATE USER {{ ansible_user }} WITH SUPERUSER CREATEDB CREATEROLE"
+
+- name: Decidim | Create database
   shell:
     cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle exec rails db:create"
     chdir: "{{ osp_app_directory }}"
 
-- name: Run migrations
+- name: Decidim | Run migrations
   shell:
     cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle exec rake db:migrate"
     chdir: "{{ osp_app_directory }}"
 
-- name: Generate secret
+- name: Decidim | Generate secret
   command:
     cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle exec rake secret"
     chdir: "{{ osp_app_directory }}"
   register: secret_key_base
 
-- name: Create .env file
+- name: Decidim | Create .env file
   shell:
     cmd: touch .env
     chdir: "{{ osp_app_directory }}"
   ignore_errors: yes
 
-- name: Store secret in .env file
+- name: Decidim | Store secret in .env file
   template:
     src: templates/env.j2
     dest: "{{ osp_app_directory }}/.env"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
 
-- name: Precompile assets
+- name: Decidim | Precompile assets
   shell:
     cmd: RAILS_ENV=production /home/{{ ansible_user }}/.rbenv/shims/bundle exec rails tmp:cache:clear assets:clobber assets:precompile
     chdir: "{{ osp_app_directory }}"

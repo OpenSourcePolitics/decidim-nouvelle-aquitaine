@@ -1,17 +1,17 @@
-- name: Install redis-server
+- name: Redis | Install redis-server
   apt:
     name: redis-server
     state: present
   become: true
 
-- name: Set redis-server as a service
+- name: Redis | Set redis-server as a service
   lineinfile:
     path: /etc/redis/redis.conf
-    search_string: 'supervised no'
+    regexp: '^supervised no'
     line: supervised systemd
   become: true
 
-- name: Restart redis
+- name: Redis | Restart redis
   systemd:
     name: redis
     state: restarted
