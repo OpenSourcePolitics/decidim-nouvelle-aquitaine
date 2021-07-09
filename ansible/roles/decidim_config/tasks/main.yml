@@ -1,0 +1,5 @@
+---
+# tasks file for app_deployment
+- import_tasks: rbenv.yml
+- import_tasks: ruby.yml
+- import_tasks: decidim.yml

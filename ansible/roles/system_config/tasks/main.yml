@@ -7,7 +7,3 @@
 - import_tasks: redis.yml
 - import_tasks: logrotate.yml
 - import_tasks: create_psql_user.yml
-
-- import_tasks: rbenv.yml
-- import_tasks: ruby.yml
-- import_tasks: decidim.yml

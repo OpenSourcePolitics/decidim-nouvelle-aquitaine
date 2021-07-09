@@ -3,5 +3,5 @@
   gather_facts: yes
 
   roles:
-    - app_deployment
+    - system_config
 
