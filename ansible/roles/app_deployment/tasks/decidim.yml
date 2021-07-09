@@ -8,10 +8,6 @@
     cmd: "/home/decidim/.rbenv/shims/bundle install"
     chdir: "{{ osp_app_directory }}"
 
-- name: Decidim | Create PSQL user
-  shell:
-    cmd: sudo -u postgres psql -c "CREATE USER decidim WITH SUPERUSER CREATEDB CREATEROLE"
-
 - name: Decidim | Create database
   shell:
     cmd: "/home/decidim/.rbenv/shims/bundle exec rails db:create"
