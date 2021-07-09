@@ -1,13 +1,3 @@
-- name: Decidim | Install dependencies
-  apt:
-    pkg: 
-    - zlib1g-dev 
-    - libicu-dev
-    - nodejs 
-    - imagemagick
-    - libpq-dev
-  become: true
-
 - name: Decidim | Install bundler gem
   shell:
     cmd: "/home/decidim/.rbenv/shims/gem install bundler:2.2.11"

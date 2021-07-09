@@ -2,26 +2,18 @@
   ansible.builtin.git:
     repo: "https://github.com/rbenv/ruby-build.git"
     dest: "/home/decidim/.rbenv/plugins/ruby-build"
-  become_user: decidim
-  become: true
 
 - name: Ruby | Install Ruby
   shell:
     cmd: "/home/decidim/.rbenv/bin/rbenv install 2.6.6"
     chdir: "/home/decidim/"
-  become_user: decidim
-  become: true
 
 - name: Ruby | Set Ruby version
   shell:
     cmd: "/home/decidim/.rbenv/bin/rbenv shell 2.6.6 | /home/decidim/.rbenv/bin/rbenv global 2.6.6"
     chdir: "/home/decidim/"
-  become_user: decidim
-  become: true
 
 - name: Ruby | Set gem config
   shell:
     cmd: "echo 'gem: --no-document' > /home/decidim/.gemrc"
     chdir: "/home/decidim/"
-  become_user: decidim
-  become: true

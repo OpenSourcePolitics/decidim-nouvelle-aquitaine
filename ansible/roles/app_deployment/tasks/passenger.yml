@@ -1,12 +1,3 @@
-- name: Passenger | Install dependencies
-  apt:
-    pkg:
-    - dirmngr
-    - gnupg
-    - apt-transport-https 
-    - ca-certificates
-  become: true
-
 - name: Passenger | Add Passenger PGP key
   ansible.builtin.apt_key:
     keyserver: keyserver.ubuntu.com
