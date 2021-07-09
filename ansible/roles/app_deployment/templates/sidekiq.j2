@@ -14,9 +14,9 @@ WorkingDirectory={{ osp_app_directory }}
 # ExecStart=/bin/bash -lc 'bundle exec sidekiq -e production'
 # If you use the system's ruby:
 # ExecStart=bundle exec sidekiq -e production
-ExecStart=/home/{{ ansible_user }}/.rbenv/shims/bundle exec sidekiq -e production
-User={{ ansible_user }}
-Group={{ ansible_user }}
+ExecStart=/home/decidim/.rbenv/shims/bundle exec sidekiq -e production
+User=decidim
+Group=decidim
 UMask=0002
 
 # if we crash, restart

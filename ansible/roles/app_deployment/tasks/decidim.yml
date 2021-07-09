@@ -10,31 +10,31 @@
 
 - name: Decidim | Install bundler gem
   shell:
-    cmd: "/home/{{ ansible_user }}/.rbenv/shims/gem install bundler:2.2.11"
+    cmd: "/home/decidim/.rbenv/shims/gem install bundler:2.2.11"
     chdir: "{{ osp_app_directory }}"
 
 - name: Decidim | Run bundle install
   shell:
-    cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle install"
+    cmd: "/home/decidim/.rbenv/shims/bundle install"
     chdir: "{{ osp_app_directory }}"
 
 - name: Decidim | Create PSQL user
   shell:
-    cmd: sudo -u postgres psql -c "CREATE USER {{ ansible_user }} WITH SUPERUSER CREATEDB CREATEROLE"
+    cmd: sudo -u postgres psql -c "CREATE USER decidim WITH SUPERUSER CREATEDB CREATEROLE"
 
 - name: Decidim | Create database
   shell:
-    cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle exec rails db:create"
+    cmd: "/home/decidim/.rbenv/shims/bundle exec rails db:create"
     chdir: "{{ osp_app_directory }}"
 
 - name: Decidim | Run migrations
   shell:
-    cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle exec rake db:migrate"
+    cmd: "/home/decidim/.rbenv/shims/bundle exec rake db:migrate"
     chdir: "{{ osp_app_directory }}"
 
 - name: Decidim | Generate secret
   command:
-    cmd: "/home/{{ ansible_user }}/.rbenv/shims/bundle exec rake secret"
+    cmd: "/home/decidim/.rbenv/shims/bundle exec rake secret"
     chdir: "{{ osp_app_directory }}"
   register: secret_key_base
 
@@ -48,11 +48,9 @@
   template:
     src: templates/env.j2
     dest: "{{ osp_app_directory }}/.env"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
 
 - name: Decidim | Precompile assets
   shell:
-    cmd: RAILS_ENV=production /home/{{ ansible_user }}/.rbenv/shims/bundle exec rails tmp:cache:clear assets:clobber assets:precompile
+    cmd: RAILS_ENV=production /home/decidim/.rbenv/shims/bundle exec rails tmp:cache:clear assets:clobber assets:precompile
     chdir: "{{ osp_app_directory }}"
   ignore_errors: yes

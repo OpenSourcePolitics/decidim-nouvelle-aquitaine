@@ -21,12 +21,12 @@
 - name: Rbenv | Clone rbenv repo
   ansible.builtin.git:
     repo: "https://github.com/rbenv/rbenv.git"
-    dest: "/home/{{ ansible_user }}/.rbenv"
+    dest: "/home/decidim/.rbenv"
 
 - name: Rbenv | Set rbenv config
   shell:
-    cmd: echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/{{ ansible_user }}/.bashrc | echo 'eval "$(rbenv init -)"' >> /home/{{ ansible_user }}/.bashrc
+    cmd: echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/decidim/.bashrc | echo 'eval "$(rbenv init -)"' >> /home/decidim/.bashrc
 
 - name: Rbenv | Source .bashrc
   shell: 
-    cmd: . /home/mako/.bashrc
+    cmd: . /home/decidim/.bashrc

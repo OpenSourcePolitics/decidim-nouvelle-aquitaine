@@ -1,4 +1,4 @@
 ---
 # defaults file for app_deployment
-osp_app_directory: "/home/{{ ansible_user }}/decidim-nouvelle-aquitaine"
+osp_app_directory: "/home/decidim/decidim-nouvelle-aquitaine"
 osp_app_repository: "https://github.com/OpenSourcePolitics/decidim-nouvelle-aquitaine"
