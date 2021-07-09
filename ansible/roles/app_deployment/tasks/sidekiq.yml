@@ -9,10 +9,3 @@
     src: templates/sidekiq.j2
     dest: "/etc/systemd/system/sidekiq.service" 
   become: true
-
-- name: Sidekiq | Restart sidekiq
-  systemd:
-    state: restarted
-    daemon_reload: yes
-    name: sidekiq
-  become: true

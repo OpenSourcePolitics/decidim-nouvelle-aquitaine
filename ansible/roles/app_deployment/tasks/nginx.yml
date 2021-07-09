@@ -10,9 +10,3 @@
     dest: "/etc/nginx/sites-enabled/decidim"
     state: link
   become: true
-
-- name: Nginx | Restart nginx
-  ansible.builtin.service:
-    name: nginx
-    state: restarted
-  become: true
