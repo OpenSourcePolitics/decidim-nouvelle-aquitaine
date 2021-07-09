@@ -1,0 +1,3 @@
+---
+# defaults file for app_deployment
+osp_app_directory: "/home/decidim/decidim-nouvelle-aquitaine"
