@@ -25,5 +25,5 @@
 - name: Passenger | Set Passenger config
   template:
     src: templates/passenger.j2
-    dest: "/etc/nginx/conf.d/mod-http-passenger"
+    dest: "/etc/nginx/conf.d/mod-http-passenger.conf"
   become: true
