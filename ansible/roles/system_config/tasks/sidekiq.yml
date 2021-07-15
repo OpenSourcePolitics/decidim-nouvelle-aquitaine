@@ -4,6 +4,14 @@
     state: touch
   become: true
 
+- name: Sidekiq | Create sidekiq log directory
+  ansible.builtin.file:
+    path: "/var/log/sidekiq"
+    owner: decidim
+    group: decidim
+    state: directory
+  become: true
+
 - name: Sidekiq | Set sidekiq config
   template:
     src: templates/sidekiq.j2

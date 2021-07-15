@@ -24,8 +24,8 @@ RestartSec=1
 Restart=on-failure
 
 # output goes to /var/log/syslog
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=/var/log/sidekiq/production.log
+StandardError=/var/log/sidekiq/error.log
 
 # This will default to "bundler" if we don't specify it
 SyslogIdentifier=sidekiq
