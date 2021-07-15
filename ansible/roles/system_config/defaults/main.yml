@@ -2,3 +2,4 @@
 # defaults file for app_deployment
 osp_app_directory: "/home/decidim/decidim-nouvelle-aquitaine"
 ruby_version: "{{ lookup('file', '{{ osp_app_directory }}/.ruby-version') }}"
+db_user: "{{ lookup('env','DATABASE_USERNAME') }}"
