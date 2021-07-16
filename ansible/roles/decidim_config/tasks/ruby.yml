@@ -5,7 +5,7 @@
 
 - name: Ruby | Install Ruby
   shell:
-    cmd: "/home/decidim/.rbenv/bin/rbenv install 2.6.6"
+    cmd: "/home/decidim/.rbenv/bin/rbenv install -s 2.6.6"
     chdir: "/home/decidim/"
 
 - name: Ruby | Set Ruby version
