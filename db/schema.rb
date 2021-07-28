@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_10_225642) do
+ActiveRecord::Schema.define(version: 2021_07_28_164218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -357,18 +357,6 @@ ActiveRecord::Schema.define(version: 2021_05_10_225642) do
     t.index ["decidim_scope_id"], name: "index_decidim_budgets_projects_on_decidim_scope_id"
   end
 
-  create_table "decidim_calendar_external_events", force: :cascade do |t|
-    t.jsonb "title", null: false
-    t.datetime "start_at", null: false
-    t.datetime "end_at", null: false
-    t.string "url"
-    t.integer "decidim_author_id", null: false
-    t.string "decidim_author_type"
-    t.integer "decidim_organization_id", null: false
-    t.index ["decidim_author_id"], name: "decidim_calendar_external_event_author"
-    t.index ["decidim_organization_id"], name: "decidim_calendar_external_event_organization"
-  end
-
   create_table "decidim_categories", id: :serial, force: :cascade do |t|
     t.jsonb "name", null: false
     t.jsonb "description", null: false
@@ -436,17 +424,6 @@ ActiveRecord::Schema.define(version: 2021_05_10_225642) do
     t.index ["decidim_commentable_type", "decidim_commentable_id"], name: "decidim_comments_comment_commentable"
     t.index ["decidim_root_commentable_type", "decidim_root_commentable_id"], name: "decidim_comments_comment_root_commentable"
     t.index ["decidim_user_group_id"], name: "index_decidim_comments_comments_on_decidim_user_group_id"
-  end
-
-  create_table "decidim_comparative_stats_endpoints", force: :cascade do |t|
-    t.string "endpoint"
-    t.boolean "active"
-    t.bigint "decidim_organization_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name"
-    t.string "api_version"
-    t.index ["decidim_organization_id"], name: "decidim_comparative_stats_constraint_organization"
   end
 
   create_table "decidim_components", id: :serial, force: :cascade do |t|
@@ -932,16 +909,15 @@ ActiveRecord::Schema.define(version: 2021_05_10_225642) do
     t.string "id_documents_methods", default: ["online"], array: true
     t.jsonb "id_documents_explanation_text", default: {}
     t.boolean "user_groups_enabled", default: false, null: false
-    t.jsonb "colors", default: {}
     t.jsonb "smtp_settings"
-    t.string "deepl_api_key"
+    t.jsonb "colors", default: {}
     t.boolean "force_users_to_authenticate_before_access_organization", default: false
-    t.integer "comments_max_length", default: 1000
     t.jsonb "omniauth_settings"
     t.boolean "rich_text_editor_in_public_views", default: false
     t.jsonb "admin_terms_of_use_body"
     t.string "time_zone", limit: 255, default: "UTC"
     t.boolean "enable_machine_translations", default: false
+    t.integer "comments_max_length", default: 1000
     t.jsonb "file_upload_settings"
     t.string "machine_translation_display_priority", default: "original", null: false
     t.index ["host"], name: "index_decidim_organizations_on_host", unique: true
@@ -976,6 +952,7 @@ ActiveRecord::Schema.define(version: 2021_05_10_225642) do
     t.datetime "updated_at", null: false
     t.boolean "active", default: false
     t.integer "position"
+    t.jsonb "action_btn_text"
     t.jsonb "cta_text", default: {}
     t.string "cta_path"
     t.index ["decidim_participatory_process_id", "active"], name: "unique_index_to_avoid_duplicate_active_steps", unique: true, where: "(active = true)"
@@ -1136,13 +1113,12 @@ ActiveRecord::Schema.define(version: 2021_05_10_225642) do
     t.text "address"
     t.float "latitude"
     t.float "longitude"
-    t.datetime "published_at"
     t.integer "proposal_notes_count", default: 0, null: false
+    t.datetime "published_at"
     t.integer "coauthorships_count", default: 0, null: false
-    t.integer "position"
     t.string "participatory_text_level"
+    t.integer "position"
     t.boolean "created_in_meeting", default: false
-    t.boolean "collaborative_draft_origin", default: false
     t.decimal "cost"
     t.jsonb "cost_report"
     t.jsonb "execution_period"
@@ -1407,9 +1383,9 @@ ActiveRecord::Schema.define(version: 2021_05_10_225642) do
     t.string "nickname", limit: 20, default: "", null: false
     t.string "personal_url"
     t.text "about"
-    t.datetime "accepted_tos_version"
     t.datetime "officialized_at"
     t.jsonb "officialized_as"
+    t.datetime "accepted_tos_version"
     t.string "newsletter_token", default: ""
     t.datetime "newsletter_notifications_at"
     t.string "type", null: false
@@ -1519,7 +1495,6 @@ ActiveRecord::Schema.define(version: 2021_05_10_225642) do
   add_foreign_key "decidim_budgets_orders", "decidim_budgets_budgets"
   add_foreign_key "decidim_budgets_projects", "decidim_budgets_budgets"
   add_foreign_key "decidim_categorizations", "decidim_categories"
-  add_foreign_key "decidim_comparative_stats_endpoints", "decidim_organizations"
   add_foreign_key "decidim_identities", "decidim_organizations"
   add_foreign_key "decidim_newsletters", "decidim_users", column: "author_id"
   add_foreign_key "decidim_participatory_process_steps", "decidim_participatory_processes"
