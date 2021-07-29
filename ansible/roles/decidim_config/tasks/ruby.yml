@@ -1,0 +1,19 @@
+- name: Ruby | Clone ruby-build repo
+  ansible.builtin.git:
+    repo: "https://github.com/rbenv/ruby-build.git"
+    dest: "/home/decidim/.rbenv/plugins/ruby-build"
+
+- name: Ruby | Install Ruby
+  shell:
+    cmd: "/home/decidim/.rbenv/bin/rbenv install -s 2.6.6"
+    chdir: "/home/decidim/"
+
+- name: Ruby | Set Ruby version
+  shell:
+    cmd: "/home/decidim/.rbenv/bin/rbenv shell 2.6.6 | /home/decidim/.rbenv/bin/rbenv global 2.6.6"
+    chdir: "/home/decidim/"
+
+- name: Ruby | Set gem config
+  shell:
+    cmd: "echo 'gem: --no-document' > /home/decidim/.gemrc"
+    chdir: "/home/decidim/"

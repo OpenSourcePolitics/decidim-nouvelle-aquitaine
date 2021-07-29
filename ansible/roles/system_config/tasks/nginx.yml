@@ -1,0 +1,18 @@
+- name: Nginx | Set nginx config
+  template:
+    src: templates/nginx.j2
+    dest: "/etc/nginx/sites-available/decidim"
+  become: true
+
+- name: Nginx | Add symbolic link to sites-enabled
+  ansible.builtin.file:
+    src: "/etc/nginx/sites-available/decidim"
+    dest: "/etc/nginx/sites-enabled/decidim"
+    state: link
+  become: true
+
+- name: Nginx | Remove default sites-enabled config
+  ansible.builtin.file:
+    path: "/etc/nginx/sites-enabled/default"
+    state: "absent"
+  become: true

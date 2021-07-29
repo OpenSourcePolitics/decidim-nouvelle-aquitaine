@@ -1,0 +1,38 @@
+- name: Rbenv | Install dependencies
+  apt:
+    pkg:
+    - git 
+    - curl 
+    - autoconf 
+    - bison 
+    - build-essential
+    - libssl-dev 
+    - libyaml-dev 
+    - libreadline-dev 
+    - libreadline6-dev 
+    - zlib1g-dev
+    - libncurses5-dev 
+    - libffi-dev 
+    - libgdbm6 
+    - libgdbm-dev 
+    - libdb-dev
+  become: true
+
+- name: Decidim | Install dependencies
+  apt:
+    pkg: 
+    - zlib1g-dev 
+    - libicu-dev
+    - nodejs 
+    - imagemagick
+    - libpq-dev
+  become: true
+
+- name: Passenger | Install dependencies
+  apt:
+    pkg:
+    - dirmngr
+    - gnupg
+    - apt-transport-https 
+    - ca-certificates
+  become: true

@@ -1,0 +1,27 @@
+server {
+    if ($host = DECIDIM_URL) {
+        return 301 https://$host$request_uri;
+    }
+
+    listen 80;
+
+    server_name DECIDIM_URL;
+    return 404;
+}
+
+server {
+
+    server_name DECIDIM_URL;
+
+    client_max_body_size 32M;
+
+    passenger_enabled on;
+
+    rails_env    production;
+    root         {{ osp_app_directory }}/public;
+
+    listen 443 ssl;
+    ssl_certificate SSL_CERT_PATH;
+    ssl_certificate_key SSL_KEY_PATH; 
+
+}

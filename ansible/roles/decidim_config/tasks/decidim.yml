@@ -1,0 +1,42 @@
+- name: Decidim | Install bundler gem
+  shell:
+    cmd: "/home/decidim/.rbenv/shims/gem install bundler:2.2.11"
+    chdir: "{{ osp_app_directory }}"
+
+- name: Decidim | Run bundle install
+  shell:
+    cmd: "/home/decidim/.rbenv/shims/bundle install"
+    chdir: "{{ osp_app_directory }}"
+
+- name: Decidim | Create database
+  shell:
+    cmd: "/home/decidim/.rbenv/shims/bundle exec rails db:create"
+    chdir: "{{ osp_app_directory }}"
+
+- name: Decidim | Run migrations
+  shell:
+    cmd: "/home/decidim/.rbenv/shims/bundle exec rake db:migrate"
+    chdir: "{{ osp_app_directory }}"
+
+- name: Decidim | Generate secret
+  command:
+    cmd: "/home/decidim/.rbenv/shims/bundle exec rake secret"
+    chdir: "{{ osp_app_directory }}"
+  register: secret_key_base
+
+- name: Decidim | Create .env file
+  shell:
+    cmd: touch .env
+    chdir: "{{ osp_app_directory }}"
+  ignore_errors: yes
+
+- name: Decidim | Store secret in .env file
+  template:
+    src: templates/env.j2
+    dest: "{{ osp_app_directory }}/.env"
+
+- name: Decidim | Precompile assets
+  shell:
+    cmd: RAILS_ENV=production /home/decidim/.rbenv/shims/bundle exec rails tmp:cache:clear assets:clobber assets:precompile
+    chdir: "{{ osp_app_directory }}"
+  ignore_errors: yes

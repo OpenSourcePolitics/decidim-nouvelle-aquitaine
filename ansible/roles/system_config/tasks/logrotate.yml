@@ -1,0 +1,11 @@
+- name: Logrotate | Create logrotate decidim file
+  ansible.builtin.file:
+    path: "/etc/logrotate.d/decidim"
+    state: touch
+  become: true
+
+- name: Logrotate | Set logrotate config
+  template:
+    src: templates/logrotate.j2
+    dest: "/etc/logrotate.d/decidim"
+  become: true
