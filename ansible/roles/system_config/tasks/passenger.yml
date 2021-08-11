@@ -1,6 +1,6 @@
 - name: Passenger | Add Passenger PGP key
   ansible.builtin.apt_key:
-    keyserver: keyserver.ubuntu.com
+    keyserver: keyserver.ubuntu.com:80
     id: 561F9B9CAC40B2F7
   become: true
 
