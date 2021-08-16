@@ -33,10 +33,10 @@ en:
   decidim:
     version:
       show:
-        changes_at_title: Changements sur "%{title}"
+        changes_at_title: Changes on "%{title}"
     versions_list:
       show:
-        changes_at_title: Changements sur "%{title}"
+        changes_at_title: Changes on "%{title}"
   layouts:
     decidim:
       footer:
