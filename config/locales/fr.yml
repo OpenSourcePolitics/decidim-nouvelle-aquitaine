@@ -30,6 +30,12 @@ fr:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
+    version:
+      show:
+        changes_at_title: Changements sur "%{title}"
+    versions_list:
+      show:
+        changes_at_title: Changements sur "%{title}"
   layouts:
     decidim:
       footer:

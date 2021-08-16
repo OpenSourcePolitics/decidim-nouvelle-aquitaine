@@ -30,6 +30,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  decidim:
+    version:
+      show:
+        changes_at_title: Changes on "%{title}"
+    versions_list:
+      show:
+        changes_at_title: Changes on "%{title}"
   layouts:
     decidim:
       footer:
