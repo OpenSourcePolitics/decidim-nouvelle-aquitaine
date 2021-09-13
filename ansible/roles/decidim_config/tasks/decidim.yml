@@ -18,23 +18,6 @@
     cmd: "/home/decidim/.rbenv/shims/bundle exec rake db:migrate"
     chdir: "{{ osp_app_directory }}"
 
-- name: Decidim | Generate secret
-  command:
-    cmd: "/home/decidim/.rbenv/shims/bundle exec rake secret"
-    chdir: "{{ osp_app_directory }}"
-  register: secret_key_base
-
-- name: Decidim | Create .env file
-  shell:
-    cmd: touch .env
-    chdir: "{{ osp_app_directory }}"
-  ignore_errors: yes
-
-- name: Decidim | Store secret in .env file
-  template:
-    src: templates/env.j2
-    dest: "{{ osp_app_directory }}/.env"
-
 - name: Decidim | Precompile assets
   shell:
     cmd: RAILS_ENV=production /home/decidim/.rbenv/shims/bundle exec rails tmp:cache:clear assets:clobber assets:precompile
