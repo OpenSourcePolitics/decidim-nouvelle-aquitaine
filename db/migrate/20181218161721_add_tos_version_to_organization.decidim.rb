@@ -1,8 +1,8 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim (originally 20180508111640)
 
 class AddTosVersionToOrganization < ActiveRecord::Migration[5.1]
-
   def localized_attribute(slug, attribute)
     Decidim.available_locales.inject({}) do |result, locale|
       text = I18n.with_locale(locale) do

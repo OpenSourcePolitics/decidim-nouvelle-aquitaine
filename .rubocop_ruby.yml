@@ -1,6 +1,5 @@
 require:
   - rubocop-rspec
-  - rubocop-faker
 
 # Common configuration.
 AllCops:

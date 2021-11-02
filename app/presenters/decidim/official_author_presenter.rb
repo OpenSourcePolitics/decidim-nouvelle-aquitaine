@@ -29,8 +29,10 @@ module Decidim
       false
     end
 
+    # rubocop:disable Naming/PredicateName
     def has_tooltip?
       false
     end
+    # rubocop:enable Naming/PredicateName
   end
 end
