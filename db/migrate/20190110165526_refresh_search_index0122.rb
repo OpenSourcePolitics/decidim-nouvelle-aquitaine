@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class RefreshSearchIndex0122 < ActiveRecord::Migration[5.2]
   def change
-
     # From decidim-core/db/migrate/20180206143340_fix_reference_for_all_resources.rb
     models = ActiveRecord::Base.descendants.select { |c| c.included_modules.include?(Decidim::HasReference) }
 
@@ -22,6 +23,5 @@ class RefreshSearchIndex0122 < ActiveRecord::Migration[5.2]
         # m.try_update_index_for_search_resource
       end
     end
-
   end
 end

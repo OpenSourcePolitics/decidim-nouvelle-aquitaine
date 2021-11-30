@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim (originally 20190925091507)
 
 class AddUniqIndexToDecidimMetrics < ActiveRecord::Migration[5.2]

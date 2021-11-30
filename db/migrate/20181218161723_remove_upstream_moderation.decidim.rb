@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim (originally 20180530072433)
 
 class RemoveUpstreamModeration < ActiveRecord::Migration[5.1]

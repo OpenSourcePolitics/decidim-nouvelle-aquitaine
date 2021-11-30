@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class UpdateSearchIndexes < ActiveRecord::Migration[5.2]
   def change
-
     Decidim::SearchableResource.destroy_all
 
     Decidim::User.find_each(&:add_to_index_as_search_resource)
@@ -13,6 +14,5 @@ class UpdateSearchIndexes < ActiveRecord::Migration[5.2]
     Decidim::Debates::Debate.find_each(&:add_to_index_as_search_resource)
     Decidim::Budgets::Project.find_each(&:add_to_index_as_search_resource)
     Decidim::Blogs::Post.find_each(&:add_to_index_as_search_resource)
-
   end
 end
